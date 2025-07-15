@@ -1,5 +1,6 @@
-const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const {ModuleFederationPlugin} = require('webpack').container;
+const path = require("path");
 
 module.exports = {
   entry: "./src/index.js", // entry point for the app
@@ -34,12 +35,23 @@ module.exports = {
     extensions: [".js", ".jsx"],
   },
   plugins: [
+    new ModuleFederationPlugin({
+      name: 'remote',
+      filename: 'remoteEntry.js',
+      exposes: {
+        './App': './src/App',
+      },
+      shared: {                                   // Shared packages if needed
+        react: { singleton: true },
+        'react-dom': { singleton: true },
+      },
+    }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "utils/index.html"),
     }),
   ],
   devServer: {
-    port: 3000, // port where your app will be available
+    port: 5000, // port where your app will be available
     static: "./public", // folder to watch for constant changes for reloading
   },
 };
