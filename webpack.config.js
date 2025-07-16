@@ -41,7 +41,8 @@ module.exports = {
       remotes: {
         remote: "remote@http://localhost:5000/remoteEntry.js",
       },
-      shared: {react: {singleton: true}, "react-dom": {singleton: true}},
+      shared: { react: {singleton: true}, 
+              "react-dom": {singleton: true} },
     }),
     new ExternalTemplateRemotesPlugin(),
     new HtmlWebpackPlugin({
