@@ -11,6 +11,7 @@ module.exports = {
     path: path.resolve(__dirname, "public"), // where should this bundled app be created, created by webpack
     clean: true, // clean the bundled folder first
   },
+  devtool: 'source-map',
   module: {
     rules: [
       {
